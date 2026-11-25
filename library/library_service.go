@@ -2,28 +2,23 @@ package library
 
 import (
 	"fmt"
-	"library-system/models"
 	"library-system/utils"
 )
 
 
-
+// logic code 
 
 func  AddBook(lib *Library) error {
 	id := utils.GenerateId()
 	title := utils.GetNoneEmptyString("Nhap tieu de: ")
 	author := utils.GetNoneEmptyString("Nhap ten tach gia: ")
 
-	lib.book[id]  = models.Book{
-		Id: id,
-		Title: title,
-		Author: author,
-
+	if err := lib.AddBooksStore(id, title, author); err != nil {
+		return err
 	}
-	
 
-	fmt.Println("Them sach thanh cong")
-	fmt.Printf("Book: %+v", lib.book)
+	fmt.Printf("Them sach thanh cong voi ID \n: %s", id)
+
 
 	return nil
 }

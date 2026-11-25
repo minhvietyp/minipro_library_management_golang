@@ -7,7 +7,8 @@ import (
 )
 
 func main() {
-	lib := library
+	lib := library.NewLibrary()
+
 	for {
 		utils.ClearScreen()
 
@@ -28,7 +29,7 @@ func main() {
 		switch choice {
 		case 1:
 			fmt.Println("======Them sach=====")
-			if err := library.AddBook(); err != nil {
+			if err := library.AddBook(lib); err != nil {
 				fmt.Printf("XXX Loi khi them sach: %v \n", err)
 			}
 		case 2:
