@@ -23,7 +23,20 @@ func  AddBook(lib *Library) error {
 	return nil
 }
 
-func ListBook() error {
+func ListBook(lib *Library) error {
+	books := lib.ListBooksStore()
+	if len(books) == 0 {
+		fmt.Println("Thu vien chua co sach vui long them sach")
+		return nil
+	}
+	for _, book := range books {
+		status := "Con"
+		if book.IsAvailable {
+			status = "Da muon"
+		}
+		fmt.Printf("id : %s, Tieu de: %s, Tac gia: %s, Trang thai: %s", book.Id, book.Title, book.Author, status)
+	}
+
 	return nil
 }
 

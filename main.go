@@ -34,7 +34,7 @@ func main() {
 			}
 		case 2:
 			fmt.Println("======Xem danh sach sach=====")
-			if err := library.ListBook(); err != nil {
+			if err := library.ListBook(lib); err != nil {
 				fmt.Printf("XXX Loi xem danh sach them sach: %v \n", err)
 			}
 		case 3:

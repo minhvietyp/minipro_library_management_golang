@@ -4,6 +4,6 @@ type Book struct {
 	Id string
 	Title string
 	Author string
-	isAvailable bool
+	IsAvailable bool
 	borrowerId string
 }
