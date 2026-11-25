@@ -15,6 +15,7 @@ type Library struct {
 func NewLibrary() *Library {
 	return &Library{
 		book: make(map[string]models.Book),
+		borrower: make(map[string]models.Borrower),
 	}
 }
 
@@ -50,6 +51,14 @@ func (lib *Library) AddBorrowersStore(id, name, email string) error {
 		Email: email,
 	}
 	return nil
+}
+
+func (lib *Library) ListBorrowersStore() []models.Borrower{
+	borrowers := make([]models.Borrower, 0, len(lib.borrower))
+	for _, borrower := range lib.borrower {
+		borrowers = append(borrowers, borrower)
+	}
+	return borrowers
 }
 
 

@@ -55,22 +55,32 @@ func AddBorrower(lib *Library) error {
 	return nil
 }
 
-func ListBorrower() error {
+func ListBorrower(lib *Library) error {
+	borrowers := lib.ListBorrowersStore()
+	if len(borrowers) == 0 {
+		fmt.Println("Thu vien chua co nguoi muon vui long them sach")
+		return nil
+	}
+	fmt.Println("Danh sach nguoi muon")
+	for _, borrower := range borrowers {
+		fmt.Printf("id : %s, Ten: %s, Email: %s", borrower.Id, borrower.Name, borrower.Email)
+	}
+
 	return nil
 }
 
-func BorrowBook() error {
+func BorrowBook(lib *Library) error {
 	return nil
 }
 
-func ListBorrowHistory() error {
+func ListBorrowHistory(lib *Library) error {
 	return nil
 }
 
-func ReturnBook() error {
+func ReturnBook(lib *Library) error {
 	return nil
 }
 
-func SearchBook() error {
+func SearchBook(lib *Library) error {
 	return nil
 }

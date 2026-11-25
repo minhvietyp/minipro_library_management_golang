@@ -39,32 +39,32 @@ func main() {
 			}
 		case 3:
 			fmt.Println("======Them nguoi muon sach=====")
-			if err := library.AddBorrower(); err != nil {
+			if err := library.AddBorrower(lib); err != nil {
 				fmt.Printf("XXX Loi khi them nguoi muonm sach: %v \n", err)
 			}
 		case 4:
 			fmt.Println("======Xem danh sach nguoi muon =====")
-			if err := library.ListBorrower(); err != nil {
+			if err := library.ListBorrower(lib); err != nil {
 				fmt.Printf("XXX Loi khi xem danh sach nguoi muon: %v \n", err)
 			}
 		case 5:
 			fmt.Println("======Muon sach =====")
-			if err := library.BorrowBook(); err != nil {
+			if err := library.BorrowBook(lib); err != nil {
 				fmt.Printf("XXX Loi khi muon sach: %v \n", err)
 			}
 		case 6:
 			fmt.Println("======Xem lich su muon sach =====")
-			if err := library.ListBorrowHistory(); err != nil {
+			if err := library.ListBorrowHistory(lib); err != nil {
 				fmt.Printf("XXX Loi khi xem lich su muon sach: %v \n", err)
 			}
 		case 7:
 			fmt.Println("======Tra sach=====")
-			if err := library.ReturnBook(); err != nil {
+			if err := library.ReturnBook(lib); err != nil {
 				fmt.Printf("XXX Loi khi tra sach: %v \n", err)
 			}
 		case 8:
 			fmt.Println("======Tim kiem sach=====")
-			if err := library.SearchBook(); err != nil {
+			if err := library.SearchBook(lib); err != nil {
 				fmt.Printf("XXX Loi khi tim kiem sach: %v \n", err)
 			}
 		case 9:
