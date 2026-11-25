@@ -9,6 +9,7 @@ import (
 
 type Library struct {
 	book map[string]models.Book
+	borrower map[string]models.Borrower
 }
 
 func NewLibrary() *Library {
@@ -37,6 +38,18 @@ func (lib *Library) ListBooksStore() []models.Book {
 		books = append(books, book)
 	}
 	return books
+}
+
+func (lib *Library) AddBorrowersStore(id, name, email string) error {
+	if _, exists := lib.borrower[id]; exists {
+		return fmt.Errorf("Sach voi id %s da  ton tai:", id)
+	}
+	lib.borrower[id] = models.Borrower{
+		Id:     id,
+		Name: name,
+		Email: email,
+	}
+	return nil
 }
 
 

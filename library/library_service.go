@@ -40,7 +40,18 @@ func ListBook(lib *Library) error {
 	return nil
 }
 
-func AddBorrower() error {
+func AddBorrower(lib *Library) error {
+	id := utils.GenerateId()
+	name := utils.GetNoneEmptyString("Nhap ten: ")
+	email := utils.GetNoneEmptyString("Nhap email: ")
+
+	if err := lib.AddBorrowersStore(id, name, email); err != nil {
+		return err
+	}
+
+	fmt.Printf("Them nguoi muon thanh cong voi ID \n: %s", id)
+
+
 	return nil
 }
 
