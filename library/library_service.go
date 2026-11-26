@@ -83,7 +83,7 @@ func BorrowBook(lib *Library) error {
 
 func ListBorrowHistory(lib *Library) error {
 	borrowerId := utils.GetNoneEmptyString("NHap ID nguoi muon: ")
-	transaction := lib.ListBorrowHistoryByBorrower(borrowerId)
+	transaction := lib.ListBorrowHistoryByBorrowerstore(borrowerId)
 	if len(transaction) == 0 {
 		fmt.Printf("Khong co lich su muon sach voi ID %s", borrowerId)
 	}
@@ -94,12 +94,18 @@ func ListBorrowHistory(lib *Library) error {
 		if !transaction.ReturnDate.IsZero() {
 			returnDate = transaction.ReturnDate.Format("2006-01-01")
 		}
-		fmt.Printf("Giao dich: %s, Sach: %s, Ngay muon: %s, Ngay tra: %s", transaction.TransactionId, transaction.BookId, transaction.BorrowDate.Format("2006-01-01"), returnDate)
+		fmt.Printf("Giao dich: %s, Sach: %s, Ngay muon: %s, Ngay tra: %s", transaction.TransactionId, lib.GetBookTitleStore(transaction.BookId), transaction.BorrowDate.Format("2006-01-01"), returnDate)
 	}
 	return nil
 }
 
 func ReturnBook(lib *Library) error {
+	transactionId := utils.GetNoneEmptyString("NHap Id giao dich: ")
+	if err := lib.ReturnBookStore(transactionId); err != nil {
+		return err
+	}
+
+	fmt.Println("Tra sach thanh cong")
 	return nil
 }
 
