@@ -5,10 +5,9 @@ import (
 	"library-system/utils"
 )
 
+// logic code
 
-// logic code 
-
-func  AddBook(lib *Library) error {
+func AddBook(lib *Library) error {
 	id := utils.GenerateId()
 	title := utils.GetNoneEmptyString("Nhap tieu de: ")
 	author := utils.GetNoneEmptyString("Nhap ten tach gia: ")
@@ -18,7 +17,6 @@ func  AddBook(lib *Library) error {
 	}
 
 	fmt.Printf("Them sach thanh cong voi ID \n: %s", id)
-
 
 	return nil
 }
@@ -51,7 +49,6 @@ func AddBorrower(lib *Library) error {
 
 	fmt.Printf("Them nguoi muon thanh cong voi ID \n: %s", id)
 
-
 	return nil
 }
 
@@ -70,10 +67,35 @@ func ListBorrower(lib *Library) error {
 }
 
 func BorrowBook(lib *Library) error {
+	transactionId := utils.GenerateId()
+	bookId := utils.GetNoneEmptyString("Nhap ID sach: ")
+	borrowerId := utils.GetNoneEmptyString("Nhap ID nguoi muon: ")
+
+	if err := lib.BorrowBooksStore(transactionId , bookId, borrowerId); err != nil {
+		return err
+	}
+
+	fmt.Printf("Muon sach thanh cong voi ID giao dich: %s", transactionId)
+
+
 	return nil
 }
 
 func ListBorrowHistory(lib *Library) error {
+	borrowerId := utils.GetNoneEmptyString("NHap ID nguoi muon: ")
+	transaction := lib.ListBorrowHistoryByBorrower(borrowerId)
+	if len(transaction) == 0 {
+		fmt.Printf("Khong co lich su muon sach voi ID %s", borrowerId)
+	}
+
+	fmt.Println("Lich su muon sach: ")
+	for _, transaction := range transaction {
+		returnDate := "CHua tra"
+		if !transaction.ReturnDate.IsZero() {
+			returnDate = transaction.ReturnDate.Format("2006-01-01")
+		}
+		fmt.Printf("Giao dich: %s, Sach: %s, Ngay muon: %s, Ngay tra: %s", transaction.TransactionId, transaction.BookId, transaction.BorrowDate.Format("2006-01-01"), returnDate)
+	}
 	return nil
 }
 
